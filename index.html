@@ -4,14 +4,11 @@
     <title>Map</title>
     <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
-    <script src="/node_modules/datamaps/dist/datamaps.all.js"></script>
+    <script src="/node_modules/datamaps/dist/datamaps.usa.min.js"></script>
 </head>
 <body>
     <div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
     <script>
-      var width = 1000;
-      var height = 600;
-
       var states = {
         AL: {fillKey: 'levelOne'},
         AK: {fillKey: 'levelOne'},
@@ -76,8 +73,9 @@
         location: {latitude: 33.448457, longitude: -112.073844}
       }];
 
+      var element = document.getElementById('container');
       var map = new Datamap({
-        element: document.getElementById('container'),
+        element: element,
         scope: 'usa',
         fills: {
           levelFive: 'rgb(252,15,27)',
@@ -89,20 +87,28 @@
         },
         data: states,
         done: function(datamap) {
-          // Testing zoom in.
           datamap.svg.selectAll('.datamaps-subunit')
             .on('click', function(geography) {
+              // Testing hide all other states.
+              // datamap.svg.selectAll('.datamaps-subunit')
+              //   .style('visibility', function(d){
+              //     return d.id === geography.id ? 'visible' : 'hidden';
+              //   });
+
+              // Testing zoom in.
               var bounds = datamap.path.bounds(geography),
                 dx = bounds[1][0] - bounds[0][0],
                 dy = bounds[1][1] - bounds[0][1],
                 x = (bounds[0][0] + bounds[1][0]) / 2,
-                y = (bounds[0][1] + bounds[1][1]) / 2,
-                scale = .9 / Math.max(dx / width, dy / height),
-                translate = [width / 2 - scale * x, height / 2 - scale * y];
+                y = (bounds[0][1] + bounds[1][1]) / 2;
 
-              datamap.svg.transition()
+              var scaleFactor = Math.max(dx / element.offsetWidth, dy / element.offsetHeight);
+              var scale = 3 + 0.1 / scaleFactor; // Make sure texas zooms in enough, and connecticut doesn't zoom in too much.
+              var translate = [element.offsetWidth / 2 - scale * x, element.offsetHeight / 2 - scale * y];
+
+              datamap.svg.selectAll('g')
+                .transition()
                 .duration(750)
-                .style("stroke-width", 1.5 / scale + "px")
                 .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
             });
 
