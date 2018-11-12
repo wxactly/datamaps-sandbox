@@ -4,7 +4,7 @@
     <title>Map</title>
     <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
-    <script src="/node_modules/datamaps/dist/datamaps.usa.min.js"></script>
+    <script src="/node_modules/datamaps/dist/datamaps.none.min.js"></script>
 </head>
 <body>
     <div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
@@ -78,7 +78,20 @@
 
       var map = new Datamap({
         element: element,
-        scope: 'usa',
+        geographyConfig: {
+          dataUrl: '/USA.json'
+        },
+        scope: 'units',
+        setProjection: function (element, options) {
+          var projection = d3.geo.albersUsa()
+            .scale(element.offsetWidth)
+            .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+
+          var path = d3.geo.path()
+            .projection(projection);
+
+          return {path: path, projection: projection};
+        },
         fills: {
           "rank-1": "#D52A2A",
           "rank-2": "#D22929",
