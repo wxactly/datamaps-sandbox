@@ -109,7 +109,7 @@
               datamap.svg.selectAll('g')
                 .transition()
                 .duration(750)
-                .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
+                .attr("transform", "rotate(0," + x + "," + y + ")translate(" + translate + ")scale(" + scale + ")");
             });
 
           // Testing pins.
