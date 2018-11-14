@@ -5,6 +5,11 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
     <script src="/node_modules/datamaps/dist/datamaps.usa.min.js"></script>
+    <style>
+        body {
+            background: #111111;
+        }
+    </style>
 </head>
 <body>
     <div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
@@ -62,6 +67,60 @@
         NM: {fillKey: 'rank-50'}
       };
 
+      var fills = {
+        "rank-1": "#D52A2A",
+        "rank-2": "#D22929",
+        "rank-3": "#D02929",
+        "rank-4": "#CD2929",
+        "rank-5": "#CB2828",
+        "rank-6": "#C92828",
+        "rank-7": "#C62828",
+        "rank-8": "#C42727",
+        "rank-9": "#C22727",
+        "rank-10": "#BF2727",
+        "rank-11": "#BD2727",
+        "rank-12": "#BB2626",
+        "rank-13": "#B82626",
+        "rank-14": "#B62626",
+        "rank-15": "#B42525",
+        "rank-16": "#B12525",
+        "rank-17": "#AF2525",
+        "rank-18": "#AD2424",
+        "rank-19": "#AA2424",
+        "rank-20": "#A82424",
+        "rank-21": "#A62424",
+        "rank-22": "#A32323",
+        "rank-23": "#A12323",
+        "rank-24": "#9F2323",
+        "rank-25": "#9C2222",
+        "rank-26": "#9A2222",
+        "rank-27": "#982222",
+        "rank-28": "#952121",
+        "rank-29": "#932121",
+        "rank-30": "#912121",
+        "rank-31": "#8E2121",
+        "rank-32": "#8C2020",
+        "rank-33": "#8A2020",
+        "rank-34": "#872020",
+        "rank-35": "#851F1F",
+        "rank-36": "#831F1F",
+        "rank-37": "#801F1F",
+        "rank-38": "#7E1E1E",
+        "rank-39": "#7C1E1E",
+        "rank-40": "#791E1E",
+        "rank-41": "#771E1E",
+        "rank-42": "#751D1D",
+        "rank-43": "#721D1D",
+        "rank-44": "#701D1D",
+        "rank-45": "#6E1C1C",
+        "rank-46": "#6B1C1C",
+        "rank-47": "#691C1C",
+        "rank-48": "#671B1B",
+        "rank-49": "#641B1B",
+        "rank-50": "#621B1B",
+        "defaultFill": "#601B1B"
+      };
+
       var places = [{
         name: "Montgomery",
         location: {latitude: 32.361538, longitude: -86.279118}
@@ -79,61 +138,23 @@
       var map = new Datamap({
         element: element,
         scope: 'usa',
-        fills: {
-          "rank-1": "#D52A2A",
-          "rank-2": "#D22929",
-          "rank-3": "#D02929",
-          "rank-4": "#CD2929",
-          "rank-5": "#CB2828",
-          "rank-6": "#C92828",
-          "rank-7": "#C62828",
-          "rank-8": "#C42727",
-          "rank-9": "#C22727",
-          "rank-10": "#BF2727",
-          "rank-11": "#BD2727",
-          "rank-12": "#BB2626",
-          "rank-13": "#B82626",
-          "rank-14": "#B62626",
-          "rank-15": "#B42525",
-          "rank-16": "#B12525",
-          "rank-17": "#AF2525",
-          "rank-18": "#AD2424",
-          "rank-19": "#AA2424",
-          "rank-20": "#A82424",
-          "rank-21": "#A62424",
-          "rank-22": "#A32323",
-          "rank-23": "#A12323",
-          "rank-24": "#9F2323",
-          "rank-25": "#9C2222",
-          "rank-26": "#9A2222",
-          "rank-27": "#982222",
-          "rank-28": "#952121",
-          "rank-29": "#932121",
-          "rank-30": "#912121",
-          "rank-31": "#8E2121",
-          "rank-32": "#8C2020",
-          "rank-33": "#8A2020",
-          "rank-34": "#872020",
-          "rank-35": "#851F1F",
-          "rank-36": "#831F1F",
-          "rank-37": "#801F1F",
-          "rank-38": "#7E1E1E",
-          "rank-39": "#7C1E1E",
-          "rank-40": "#791E1E",
-          "rank-41": "#771E1E",
-          "rank-42": "#751D1D",
-          "rank-43": "#721D1D",
-          "rank-44": "#701D1D",
-          "rank-45": "#6E1C1C",
-          "rank-46": "#6B1C1C",
-          "rank-47": "#691C1C",
-          "rank-48": "#671B1B",
-          "rank-49": "#641B1B",
-          "rank-50": "#621B1B",
-          "rank-51": "#601B1B",
-          "defaultFill": "#000000"
-        },
+        fills: fills,
         data: states,
+        geographyConfig: {
+          hideHawaiiAndAlaska : false,
+          borderWidth: 1,
+          borderOpacity: 1,
+          borderColor: '#111111',
+          popupTemplate: function(geography, data) {
+            return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong></div>';
+          },
+          popupOnHover: true,
+          highlightOnHover: true,
+          highlightFillColor: '#601B1B',
+          highlightBorderColor: '#111111',
+          highlightBorderWidth: 2,
+          highlightBorderOpacity: 1
+        },
         done: function(datamap) {
           datamap.svg.selectAll('.datamaps-subunit')
             .on('click', function(geography) {
