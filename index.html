@@ -10,56 +10,56 @@
     <div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
     <script>
       var states = {
-        AL: {fillKey: 'levelOne'},
-        AK: {fillKey: 'levelOne'},
-        AZ: {fillKey: 'levelOne'},
-        AR: {fillKey: 'levelOne'},
-        CA: {fillKey: 'levelOne'},
-        CO: {fillKey: 'levelOne'},
-        CT: {fillKey: 'levelOne'},
-        DE: {fillKey: 'levelOne'},
-        FL: {fillKey: 'levelOne'},
-        GA: {fillKey: 'levelOne'},
-        HI: {fillKey: 'levelTwo'},
-        ID: {fillKey: 'levelTwo'},
-        IL: {fillKey: 'levelTwo'},
-        IN: {fillKey: 'levelTwo'},
-        IA: {fillKey: 'levelTwo'},
-        KS: {fillKey: 'levelTwo'},
-        KY: {fillKey: 'levelTwo'},
-        LA: {fillKey: 'levelTwo'},
-        ME: {fillKey: 'levelTwo'},
-        MD: {fillKey: 'levelTwo'},
-        MA: {fillKey: 'levelThree'},
-        MI: {fillKey: 'levelThree'},
-        MN: {fillKey: 'levelThree'},
-        MS: {fillKey: 'levelThree'},
-        MO: {fillKey: 'levelThree'},
-        MT: {fillKey: 'levelThree'},
-        NE: {fillKey: 'levelThree'},
-        NV: {fillKey: 'levelThree'},
-        NH: {fillKey: 'levelThree'},
-        NJ: {fillKey: 'levelThree'},
-        NM: {fillKey: 'levelFour'},
-        NY: {fillKey: 'levelFour'},
-        NC: {fillKey: 'levelFour'},
-        ND: {fillKey: 'levelFour'},
-        OH: {fillKey: 'levelFour'},
-        OK: {fillKey: 'levelFour'},
-        OR: {fillKey: 'levelFour'},
-        PA: {fillKey: 'levelFour'},
-        RI: {fillKey: 'levelFour'},
-        SC: {fillKey: 'levelFour'},
-        SD: {fillKey: 'levelFive'},
-        TN: {fillKey: 'levelFive'},
-        TX: {fillKey: 'levelFive'},
-        UT: {fillKey: 'levelFive'},
-        VT: {fillKey: 'levelFive'},
-        VA: {fillKey: 'levelFive'},
-        WA: {fillKey: 'levelFive'},
-        WV: {fillKey: 'levelFive'},
-        WI: {fillKey: 'levelFive'},
-        WY: {fillKey: 'levelFive'}
+        SD: {fillKey: 'rank-1'},
+        NH: {fillKey: 'rank-2'},
+        ID: {fillKey: 'rank-3'},
+        MT: {fillKey: 'rank-4'},
+        TN: {fillKey: 'rank-5'},
+        AK: {fillKey: 'rank-6'},
+        AL: {fillKey: 'rank-7'},
+        AR: {fillKey: 'rank-8'},
+        VA: {fillKey: 'rank-9'},
+        LA: {fillKey: 'rank-10'},
+        MS: {fillKey: 'rank-11'},
+        NE: {fillKey: 'rank-12'},
+        CO: {fillKey: 'rank-13'},
+        ND: {fillKey: 'rank-14'},
+        MO: {fillKey: 'rank-15'},
+        GA: {fillKey: 'rank-16'},
+        NC: {fillKey: 'rank-17'},
+        WA: {fillKey: 'rank-18'},
+        ME: {fillKey: 'rank-19'},
+        OR: {fillKey: 'rank-20'},
+        FL: {fillKey: 'rank-21'},
+        IN: {fillKey: 'rank-22'},
+        HI: {fillKey: 'rank-23'},
+        SC: {fillKey: 'rank-24'},
+        NV: {fillKey: 'rank-25'},
+        MD: {fillKey: 'rank-26'},
+        MI: {fillKey: 'rank-27'},
+        OH: {fillKey: 'rank-28'},
+        UT: {fillKey: 'rank-29'},
+        KY: {fillKey: 'rank-30'},
+        AZ: {fillKey: 'rank-31'},
+        PA: {fillKey: 'rank-32'},
+        WV: {fillKey: 'rank-33'},
+        TX: {fillKey: 'rank-34'},
+        WI: {fillKey: 'rank-35'},
+        IL: {fillKey: 'rank-36'},
+        NY: {fillKey: 'rank-37'},
+        OK: {fillKey: 'rank-38'},
+        MN: {fillKey: 'rank-39'},
+        CA: {fillKey: 'rank-40'},
+        DE: {fillKey: 'rank-41'},
+        MA: {fillKey: 'rank-42'},
+        NJ: {fillKey: 'rank-43'},
+        RI: {fillKey: 'rank-44'},
+        WY: {fillKey: 'rank-45'},
+        CT: {fillKey: 'rank-46'},
+        VT: {fillKey: 'rank-47'},
+        KS: {fillKey: 'rank-48'},
+        IA: {fillKey: 'rank-49'},
+        NM: {fillKey: 'rank-50'}
       };
 
       var places = [{
@@ -74,16 +74,64 @@
       }];
 
       var element = document.getElementById('container');
+      var activeId = '';
+
       var map = new Datamap({
         element: element,
         scope: 'usa',
         fills: {
-          levelFive: 'rgb(252,15,27)',
-          levelFour: 'rgb(167,24,29)',
-          levelThree: 'rgb(143,32,34)',
-          levelTwo: 'rgb(117,38,39)',
-          levelOne: 'rgb(86,46,47)',
-          defaultFill: 'rgb(0,0,0)'
+          "rank-1": "#D52A2A",
+          "rank-2": "#D22929",
+          "rank-3": "#D02929",
+          "rank-4": "#CD2929",
+          "rank-5": "#CB2828",
+          "rank-6": "#C92828",
+          "rank-7": "#C62828",
+          "rank-8": "#C42727",
+          "rank-9": "#C22727",
+          "rank-10": "#BF2727",
+          "rank-11": "#BD2727",
+          "rank-12": "#BB2626",
+          "rank-13": "#B82626",
+          "rank-14": "#B62626",
+          "rank-15": "#B42525",
+          "rank-16": "#B12525",
+          "rank-17": "#AF2525",
+          "rank-18": "#AD2424",
+          "rank-19": "#AA2424",
+          "rank-20": "#A82424",
+          "rank-21": "#A62424",
+          "rank-22": "#A32323",
+          "rank-23": "#A12323",
+          "rank-24": "#9F2323",
+          "rank-25": "#9C2222",
+          "rank-26": "#9A2222",
+          "rank-27": "#982222",
+          "rank-28": "#952121",
+          "rank-29": "#932121",
+          "rank-30": "#912121",
+          "rank-31": "#8E2121",
+          "rank-32": "#8C2020",
+          "rank-33": "#8A2020",
+          "rank-34": "#872020",
+          "rank-35": "#851F1F",
+          "rank-36": "#831F1F",
+          "rank-37": "#801F1F",
+          "rank-38": "#7E1E1E",
+          "rank-39": "#7C1E1E",
+          "rank-40": "#791E1E",
+          "rank-41": "#771E1E",
+          "rank-42": "#751D1D",
+          "rank-43": "#721D1D",
+          "rank-44": "#701D1D",
+          "rank-45": "#6E1C1C",
+          "rank-46": "#6B1C1C",
+          "rank-47": "#691C1C",
+          "rank-48": "#671B1B",
+          "rank-49": "#641B1B",
+          "rank-50": "#621B1B",
+          "rank-51": "#601B1B",
+          "defaultFill": "#000000"
         },
         data: states,
         done: function(datamap) {
@@ -95,16 +143,23 @@
               //     return d.id === geography.id ? 'visible' : 'hidden';
               //   });
 
-              // Testing zoom in.
-              var bounds = datamap.path.bounds(geography),
-                dx = bounds[1][0] - bounds[0][0],
-                dy = bounds[1][1] - bounds[0][1],
-                x = (bounds[0][0] + bounds[1][0]) / 2,
-                y = (bounds[0][1] + bounds[1][1]) / 2;
+              var scale = 1;
+              var translate = [0, 0];
 
-              var scaleFactor = Math.max(dx / element.offsetWidth, dy / element.offsetHeight);
-              var scale = 3 + 0.1 / scaleFactor; // Make sure texas zooms in enough, and connecticut doesn't zoom in too much.
-              var translate = [element.offsetWidth / 2 - scale * x, element.offsetHeight / 2 - scale * y];
+              if (activeId != geography.id) {
+                // Testing zoom in.
+                var bounds = datamap.path.bounds(geography),
+                  dx = bounds[1][0] - bounds[0][0],
+                  dy = bounds[1][1] - bounds[0][1],
+                  x = (bounds[0][0] + bounds[1][0]) / 2,
+                  y = (bounds[0][1] + bounds[1][1]) / 2;
+
+                // Make sure texas zooms in enough, and connecticut doesn't zoom in too much.
+                scale = 3 + 0.1 / Math.max(dx / element.offsetWidth, dy / element.offsetHeight);
+                translate = [element.offsetWidth / 2 - scale * x, element.offsetHeight / 2 - scale * y];
+
+                activeId = geography.id;
+              }
 
               datamap.svg.selectAll('g')
                 .transition()
@@ -113,21 +168,21 @@
             });
 
           // Testing pins.
-          datamap.svg.selectAll(".pin")
-            .data(places)
-            .enter().append("circle", ".pin")
-            .attr("r", 5)
-            .attr("transform", function(d) {
-              return "translate(" + datamap.projection([
-                d.location.longitude,
-                d.location.latitude
-              ]) + ")";
-            });
+          // datamap.svg.selectAll(".pin")
+          //   .data(places)
+          //   .enter().append("circle", ".pin")
+          //   .attr("r", 5)
+          //   .attr("transform", function(d) {
+          //     return "translate(" + datamap.projection([
+          //       d.location.longitude,
+          //       d.location.latitude
+          //     ]) + ")";
+          //   });
         }
       });
 
       // Testing labels.
-      map.labels();
+      //map.labels();
 
     </script>
 </body>
