@@ -146,7 +146,11 @@
               var scale = 1;
               var translate = [0, 0];
 
-              if (activeId != geography.id) {
+              if (activeId == geography.id) {
+                // Reset zoom.
+                activeId = '';
+              }
+              else {
                 // Testing zoom in.
                 var bounds = datamap.path.bounds(geography),
                   dx = bounds[1][0] - bounds[0][0],
